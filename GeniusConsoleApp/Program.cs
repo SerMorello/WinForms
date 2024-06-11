@@ -1,14 +1,11 @@
-﻿Console.WriteLine("Введите ваше имя");
-string user = Console.ReadLine();
-int countQuestions = 5;
-List<int> numberQuestions = new List<int>();
-string[] questions = Questions.GetQuestions(countQuestions);
-int[] answers = new int[countQuestions];
-answers[0] = 6;
-answers[1] = 9;
-answers[2] = 25;
-answers[3] = 60;
-answers[4] = 2;
+﻿User user = new();
+
+Console.WriteLine("Введите ваше имя");
+user.Name = Console.ReadLine();
+
+QuestionsStorage questions = new();
+
+List<int> numbersQuestions = questions.GetNumbersQuestions();
 
 string[] diagnoses = new string[6];
 diagnoses[0] = "кретин";
@@ -19,9 +16,6 @@ diagnoses[4] = "талант";
 diagnoses[5] = "гений";
 
 bool endGame = false;
-
-
-int countRightAnswers = 0;
 
 static int GetRandomNumberQuestion(int countQuestions, List<int> numberQuestions)
 {
@@ -36,28 +30,29 @@ static int GetRandomNumberQuestion(int countQuestions, List<int> numberQuestions
 }
 while (endGame == false)
 {
-    numberQuestions = [0, 1, 2, 3, 4];
-    countRightAnswers = 0;
 
-    for (int i = 0; i < countQuestions; i++)
+    user.NewGameScore();
+    numbersQuestions = questions.GetNumbersQuestions();
+
+    for (int i = 0; i < questions.Questions.Count; i++)
     {
         Console.WriteLine("Вопрос №" + (i + 1));
-        int questionIndex = GetRandomNumberQuestion(numberQuestions.Count, numberQuestions);
-        Console.WriteLine(questions[questionIndex]);
+        int questionIndex = GetRandomNumberQuestion(numbersQuestions.Count, numbersQuestions);
+        Console.WriteLine(questions.Questions[questionIndex].QuestionText);
 
         int userAnswer = Convert.ToInt32(Console.ReadLine());
 
-        int rightAnswer = answers[questionIndex];
+        int rightAnswer = questions.Questions[questionIndex].Answer;
 
         if (userAnswer == rightAnswer)
         {
-            countRightAnswers++;
+            user.IncreaseUserScore();
         }
     }
 
 
-    Console.WriteLine($"{user} Количество правильных ответов: {countRightAnswers}");
-    Console.WriteLine("Ваш диагноз:" + diagnoses[countRightAnswers]);
+    Console.WriteLine($"{user.Name} Количество правильных ответов: {user.ShowUserScore}");
+    Console.WriteLine("Ваш диагноз:" + diagnoses[user.GetUserScore()]);
 
     Console.WriteLine("Еще одну игру? 1 - Да, 2 - Нет");
     int replayGame = Convert.ToInt32(Console.ReadLine());

@@ -1,0 +1,29 @@
+﻿public class QuestionsStorage
+{
+    public List<Question> Questions { get; set; }
+    public QuestionsStorage()
+    {
+        Questions = GetQuestions();    
+    }
+    public List<Question> GetQuestions()
+    {
+        List<Question> questions = new();
+        questions.Add(new Question("Сколько будет два плюс два умноженное на два?", 6));
+        questions.Add(new Question("Бревно нужно распилить на 10 частей. Сколько распилов нужно сделать?", 9));
+        questions.Add(new Question("На двух руках 10 пальцев. Сколько пальцев на 5 руках?", 25));
+        questions.Add(new Question("Укол делают каждые полчаса. Сколько нужно минут, чтобы сделать три укола?", 60));
+        questions.Add(new Question("Пять свечей горело, две потухли. Сколько свечей осталось?", 2));
+        return questions;
+    }
+    public List<int> GetNumbersQuestions()
+    {
+        List<int> numbers = new();
+
+        for (int i = 0; i < Questions.Count; i++)
+        {
+            numbers[i] = i;
+        }
+
+        return numbers;
+    }
+}
