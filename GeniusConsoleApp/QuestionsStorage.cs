@@ -1,9 +1,11 @@
 ﻿public class QuestionsStorage
 {
-    public List<Question> Questions { get; set; }
+    public List<Question> Questions { get; set; } = new List<Question>();
+    public int CountQuestions { get; }
     public QuestionsStorage()
     {
-        Questions = GetQuestions();    
+        Questions = GetQuestions();
+        CountQuestions = Questions.Count;
     }
     public List<Question> GetQuestions()
     {
@@ -19,11 +21,21 @@
     {
         List<int> numbers = new();
 
-        for (int i = 0; i < Questions.Count; i++)
+        for (int i = 0; i < CountQuestions; i++)
         {
-            numbers[i] = i;
+            numbers.Add(i);
         }
 
         return numbers;
+    }
+    public int GetRandomNumberQuestion(int countQuestions, List<int> numberQuestions)
+    {
+        Random random = new Random();
+
+        int randomNumber = random.Next(0, countQuestions);
+        int randomQuestionIndex = numberQuestions[randomNumber];
+        numberQuestions.RemoveAt(randomNumber);
+
+        return randomQuestionIndex;
     }
 }
