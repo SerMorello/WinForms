@@ -9,18 +9,10 @@
         userDiagnoses.Insert(3, "нормальный");
         userDiagnoses.Insert(4, "талант");
         userDiagnoses.Insert(5, "гений");
-
-
-        //userDiagnoses.Add("кретин");
-        //userDiagnoses.Add("идиот");
-        //userDiagnoses.Add("дурак");
-        //userDiagnoses.Add("нормальный");
-        //userDiagnoses.Add("талант");
-        //userDiagnoses.Add("гений");
     }
     public string GetDiagnoses(int countQuestion, int countRightAnswers)
     {
-        int percentageCorrectAnswers = countQuestion / countRightAnswers * 75;
-        return userDiagnoses[userDiagnoses.Count / percentageCorrectAnswers];
+        int percentageCorrectAnswers = countRightAnswers * 100 / countQuestion;
+        return userDiagnoses[percentageCorrectAnswers / 20];
     }
 }
