@@ -3,25 +3,26 @@ public static class FileWork
 {
     public static void Serialize<T>(T obj, string filePath)
     {
-        var serializer = new JsonSerializer();
+        var serializer = JsonConvert.SerializeObject(obj, Formatting.Indented);
 
-        using (var sw = new StreamWriter(filePath))
-        using (JsonWriter writer = new JsonTextWriter(sw))
+        using (var sw = new StreamWriter(filePath, true))
         {
-            serializer.Serialize(writer, obj);
+            sw.WriteLine(serializer);
         }
     }
 
-    public static T Deserialize<T>(string path)
+    public static string Deserialize(string path)
     {
-        var serializer = new JsonSerializer();
-
         using (var sw = new StreamReader(path))
-        using (var reader = new JsonTextReader(sw))
         {
-            T obj = default(T);
-            
-            return (T)serializer.Deserialize(reader);
+            return sw.ReadToEnd();
+        }
+    }
+    public static void CheckFile(string path)
+    {
+        if (!File.Exists(path))
+        {
+            File.Create(path);
         }
     }
 }

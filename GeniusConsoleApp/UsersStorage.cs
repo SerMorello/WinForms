@@ -1,11 +1,21 @@
-﻿public class UsersResultStorage
+﻿using Newtonsoft.Json;
+
+public class UsersStorage
 {
     public List<User> Users { get; set; } = new List<User>();
-    private string path = "User.txt";
-    public void GetUsersScore ()
+    private string path = "Users.json";
+    public List<User> GetUsers()
     {
-        Users = FileWork.Deserialize<List<User>>(path);
+        FileWork.CheckFile(path);
 
+        string value = FileWork.Deserialize(path);
+
+        return JsonConvert.DeserializeObject<List<User>>(value);
+
+
+    }
+    public void ShowUsersResult()
+    {
         foreach (var user in Users)
         {
             Console.WriteLine($"Пользователь {user.Name} - правильных ответов {user.ShowUserScore}");
@@ -15,7 +25,7 @@
     {
         Users.Add(user);
     }
-    public void SaveUsers ()
+    public void SaveUsers()
     {
         FileWork.Serialize<List<User>>(Users, path);
     }

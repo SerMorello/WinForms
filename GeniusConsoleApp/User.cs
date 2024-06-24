@@ -1,7 +1,8 @@
 ﻿public class User
 {
     public string Name { get; set; } = "Непонятно";
-    private int CountRightAnswers { get; set; } = 0;
+    public int CountRightAnswers { get; set; } = 0;
+    public string Diagnose { get; set; } = "Без диагноза";
     public void IncreaseUserScore()
     {
         CountRightAnswers += 1;
