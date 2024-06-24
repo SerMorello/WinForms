@@ -36,8 +36,7 @@ while (endGame == false)
     }
 
     int userScore = user.GetUserScore();
-    //string userDiagnosis = diagnoses.GetDiagnoses(questions.CountQuestions, user.GetUserScore());
-
+  
     user.Diagnose = diagnoses.GetDiagnoses(questions.CountQuestions, user.GetUserScore());
 
     Console.WriteLine($"{user.Name} Количество правильных ответов: {userScore}");
