@@ -1,7 +1,11 @@
-﻿public class QuestionsStorage
+﻿using System.Collections;
+
+public class QuestionsStorage : IEnumerable<Question>
 {
+    private string path = "Questions.json";
     public List<Question> Questions { get; set; } = new List<Question>();
     public int CountQuestions { get; }
+
     public QuestionsStorage()
     {
         Questions = GetQuestions();
@@ -9,6 +13,8 @@
     }
     public List<Question> GetQuestions()
     {
+        FileWork.CheckFile(path);
+
         List<Question> questions = new();
         questions.Add(new Question("Сколько будет два плюс два умноженное на два?", 6));
         questions.Add(new Question("Бревно нужно распилить на 10 частей. Сколько распилов нужно сделать?", 9));
@@ -37,5 +43,19 @@
         numberQuestions.RemoveAt(randomNumber);
 
         return randomQuestionIndex;
+    }
+    public void AddQuestion(Question newQuestion)
+    {
+        List<Question> questions = GetQuestions();
+        questions
+    }
+    public IEnumerator<Question> GetEnumerator()
+    {
+        return new QuestionStorageEnumerator(Questions);
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return new QuestionStorageEnumerator(Questions);
     }
 }

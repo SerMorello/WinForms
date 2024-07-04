@@ -52,4 +52,12 @@ while (endGame == false)
     {
        endGame = true;
     }
+   
+}
+void ShowUsersResult()
+{
+    foreach (var user in usersResult)
+    {
+        Console.WriteLine($"Пользователь {user.Name}, с диагнозом {user.Diagnose} - правильных ответов {user.ShowUserScore}");
+    }
 }

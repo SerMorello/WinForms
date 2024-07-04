@@ -18,11 +18,14 @@ public static class FileWork
             return sw.ReadToEnd();
         }
     }
-    public static void CheckFile(string path)
+    public static bool CheckFile(string path)
     {
         if (!File.Exists(path))
         {
             File.Create(path);
+
+            return true;
         }
+        return false;
     }
 }
