@@ -1,63 +1,102 @@
-﻿User user = new();
-
-Console.WriteLine("Введите ваше имя");
-user.Name = Console.ReadLine();
-
-QuestionsStorage questions = new();
+﻿QuestionsStorage questions = new();
 
 Diagnoses diagnoses = new();
 
-UsersStorage usersResult = new();
-usersResult.GetUsers();
+UsersStorage users = new();
+users.GetUsers();
+
+User user = new();
+
+Console.WriteLine("Введите ваше имя");
+user.Name = Console.ReadLine();
 
 List<int> numbersQuestions = new();
 
 bool endGame = false;
 
-while (endGame == false)
+while (!endGame)
 {
-    user.NewGameScore();
-    numbersQuestions = questions.GetNumbersQuestions();
-
-    for (int i = 0; i < questions.Questions.Count; i++)
+    switch (ShowMenu())
     {
-        Console.WriteLine("Вопрос №" + (i + 1));
-        int questionIndex = questions.GetRandomNumberQuestion(numbersQuestions.Count, numbersQuestions);
-        Console.WriteLine(questions.Questions[questionIndex].QuestionText);
+        case 1:
+            user.NewGameScore();
+            numbersQuestions = questions.GetNumbersQuestions();
 
-        int userAnswer = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < questions.Questions.Count; i++)
+            {
+                Console.WriteLine("Вопрос №" + (i + 1));
+                int questionIndex = questions.GetRandomNumberQuestion(numbersQuestions.Count, numbersQuestions);
+                Console.WriteLine(questions.Questions[questionIndex].QuestionText);
 
-        int rightAnswer = questions.Questions[questionIndex].Answer;
+                int userAnswer = Convert.ToInt32(Console.ReadLine());
 
-        if (userAnswer == rightAnswer)
-        {
-            user.IncreaseUserScore();
-        }
+                int rightAnswer = questions.Questions[questionIndex].Answer;
+
+                if (userAnswer == rightAnswer)
+                {
+                    user.IncreaseUserScore();
+                }
+            }
+
+            int userScore = user.GetUserScore();
+
+            user.Diagnose = diagnoses.GetDiagnoses(questions.CountQuestions, user.GetUserScore());
+
+            Console.WriteLine();
+            Console.WriteLine($"{user.Name} Количество правильных ответов: {userScore}");
+            Console.WriteLine($"Ваш диагноз: {user.Diagnose}");
+            Console.WriteLine();
+
+            users.AddUser(user);
+
+            break;
+
+        case 2:
+            Console.WriteLine();
+            foreach (var userResult in users)
+            {
+                Console.WriteLine($"Пользователь {userResult.Name}, с диагнозом {userResult.Diagnose} - правильных ответов {userResult.CountRightAnswers}");
+            }
+            Console.WriteLine();
+
+            break;
+
+        case 3:
+            Console.WriteLine();
+            questions.ShowQuestions();
+            Console.WriteLine();
+
+            break;
+
+        case 4:
+            var addQuestion = new Question();
+
+            Console.WriteLine();
+            Console.WriteLine("Введите текст вопроса");
+            addQuestion.QuestionText = Console.ReadLine();
+
+            Console.WriteLine();
+            Console.WriteLine("Введите текст ответа");
+            addQuestion.Answer = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine();
+            questions.AddQuestion(addQuestion);
+            Console.WriteLine("Вопрос добавлен");
+            break;
+
+        case 5:
+            Console.WriteLine("Выберите номер вопроса который хотите удалить");
+            questions.ShowQuestions();
+            int numberRemoveQuestion = Convert.ToInt32(Console.ReadLine());
+            questions.RemoveQuestion(numberRemoveQuestion - 1);
+            Console.WriteLine("Вопрос удален");
+            break;
+
+        case 6: endGame = true; break;
     }
-
-    int userScore = user.GetUserScore();
-  
-    user.Diagnose = diagnoses.GetDiagnoses(questions.CountQuestions, user.GetUserScore());
-
-    Console.WriteLine($"{user.Name} Количество правильных ответов: {userScore}");
-    Console.WriteLine($"Ваш диагноз: {user.Diagnose}");
-
-    usersResult.AddUser(user);
-    usersResult.SaveUsers();
-
-    Console.WriteLine("Еще одну игру? 1 - Да, 2 - Нет");
-    int replayGame = Convert.ToInt32(Console.ReadLine());
-
-    if (replayGame == 2)
-    {
-       endGame = true;
-    }
-   
 }
-void ShowUsersResult()
+int ShowMenu()
 {
-    foreach (var user in usersResult)
-    {
-        Console.WriteLine($"Пользователь {user.Name}, с диагнозом {user.Diagnose} - правильных ответов {user.ShowUserScore}");
-    }
+    Console.WriteLine("1.Новая игра\r\n2.Показать результаты\r\n3.Показать вопросы \r\n4.Добавить вопрос\r\n5.Удалить вопрос\r\n6.Закончить игрру");
+    return Convert.ToInt32(Console.ReadLine());
 }

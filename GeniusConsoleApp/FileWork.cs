@@ -1,31 +1,30 @@
 ﻿using Newtonsoft.Json;
 public static class FileWork
 {
-    public static void Serialize<T>(T obj, string filePath)
+    public static void Write(string value, string filePath)
     {
-        var serializer = JsonConvert.SerializeObject(obj, Formatting.Indented);
-
-        using (var sw = new StreamWriter(filePath, true))
+        using (var sw = new StreamWriter(filePath, false))
         {
-            sw.WriteLine(serializer);
+            sw.WriteLine(value);
         }
+        Console.WriteLine(  "Записал");
     }
 
-    public static string Deserialize(string path)
+    public static string Read(string path)
     {
+        string value = "";
         using (var sw = new StreamReader(path))
         {
-            return sw.ReadToEnd();
+            value = sw.ReadToEnd();
         }
+        return value;
     }
     public static bool CheckFile(string path)
     {
         if (!File.Exists(path))
         {
-            File.Create(path);
-
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }
