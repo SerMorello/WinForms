@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-public static class FileWork
+﻿public static class FileWork
 {
     public static void Write(string value, string filePath)
     {
@@ -7,7 +6,6 @@ public static class FileWork
         {
             sw.WriteLine(value);
         }
-        Console.WriteLine(  "Записал");
     }
 
     public static string Read(string path)
