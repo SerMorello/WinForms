@@ -1,6 +1,6 @@
 ﻿namespace GeniusWinFormsApp
 {
-    partial class MainForm
+    partial class mainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,14 +30,20 @@
         {
             QuestionNumberLabel = new Label();
             QuestionTextLabel = new Label();
-            UserAnswerTextBox = new TextBox();
+            userAnswerTextBox = new TextBox();
             NextButton = new Button();
+            menuStrip1 = new MenuStrip();
+            менюшечкаToolStripMenuItem = new ToolStripMenuItem();
+            toolStripMenuItem1 = new ToolStripMenuItem();
+            показатьРезыToolStripMenuItem = new ToolStripMenuItem();
+            выходToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // QuestionNumberLabel
             // 
             QuestionNumberLabel.AutoSize = true;
-            QuestionNumberLabel.Location = new Point(58, 17);
+            QuestionNumberLabel.Location = new Point(12, 40);
             QuestionNumberLabel.Name = "QuestionNumberLabel";
             QuestionNumberLabel.Size = new Size(64, 15);
             QuestionNumberLabel.TabIndex = 0;
@@ -45,42 +51,81 @@
             // 
             // QuestionTextLabel
             // 
-            QuestionTextLabel.AutoSize = true;
-            QuestionTextLabel.Location = new Point(58, 49);
+            QuestionTextLabel.AutoEllipsis = true;
+            QuestionTextLabel.Location = new Point(12, 70);
             QuestionTextLabel.Name = "QuestionTextLabel";
-            QuestionTextLabel.Size = new Size(85, 15);
+            QuestionTextLabel.Size = new Size(171, 163);
             QuestionTextLabel.TabIndex = 1;
             QuestionTextLabel.Text = "Текст вопроса";
             // 
-            // UserAnswerTextBox
+            // userAnswerTextBox
             // 
-            UserAnswerTextBox.Location = new Point(58, 293);
-            UserAnswerTextBox.Name = "UserAnswerTextBox";
-            UserAnswerTextBox.Size = new Size(100, 23);
-            UserAnswerTextBox.TabIndex = 2;
-            UserAnswerTextBox.Text = "Ответ";
+            userAnswerTextBox.Location = new Point(12, 236);
+            userAnswerTextBox.Name = "userAnswerTextBox";
+            userAnswerTextBox.Size = new Size(100, 23);
+            userAnswerTextBox.TabIndex = 2;
+            userAnswerTextBox.Text = "Ответ";
             // 
             // NextButton
             // 
-            NextButton.Location = new Point(58, 336);
+            NextButton.Location = new Point(12, 279);
             NextButton.Name = "NextButton";
-            NextButton.Size = new Size(85, 23);
+            NextButton.Size = new Size(100, 23);
             NextButton.TabIndex = 3;
             NextButton.Text = "Следующий";
             NextButton.UseVisualStyleBackColor = true;
+            NextButton.Click += NextButton_Click;
             // 
-            // MainForm
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { менюшечкаToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(208, 24);
+            menuStrip1.TabIndex = 4;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // менюшечкаToolStripMenuItem
+            // 
+            менюшечкаToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem1, показатьРезыToolStripMenuItem, выходToolStripMenuItem });
+            менюшечкаToolStripMenuItem.Name = "менюшечкаToolStripMenuItem";
+            менюшечкаToolStripMenuItem.Size = new Size(87, 20);
+            менюшечкаToolStripMenuItem.Text = "менюшечка";
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(180, 22);
+            toolStripMenuItem1.Text = "новая игра";
+            // 
+            // показатьРезыToolStripMenuItem
+            // 
+            показатьРезыToolStripMenuItem.Name = "показатьРезыToolStripMenuItem";
+            показатьРезыToolStripMenuItem.Size = new Size(180, 22);
+            показатьРезыToolStripMenuItem.Text = "показать резы";
+            // 
+            // выходToolStripMenuItem
+            // 
+            выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            выходToolStripMenuItem.Size = new Size(180, 22);
+            выходToolStripMenuItem.Text = "выход";
+            // 
+            // mainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(250, 450);
+            ClientSize = new Size(208, 326);
             Controls.Add(NextButton);
-            Controls.Add(UserAnswerTextBox);
+            Controls.Add(userAnswerTextBox);
             Controls.Add(QuestionTextLabel);
             Controls.Add(QuestionNumberLabel);
-            Name = "MainForm";
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
+            Name = "mainForm";
             Text = "MainForm";
             Load += MainForm_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -89,7 +134,12 @@
 
         private Label QuestionNumberLabel;
         private Label QuestionTextLabel;
-        private TextBox UserAnswerTextBox;
+        private TextBox userAnswerTextBox;
         private Button NextButton;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem менюшечкаToolStripMenuItem;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem показатьРезыToolStripMenuItem;
+        private ToolStripMenuItem выходToolStripMenuItem;
     }
 }

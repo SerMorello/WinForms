@@ -16,7 +16,7 @@
         CountRightAnswers += 1;
     }
     public int GetUserScore() => CountRightAnswers;
-    public void ShowUserScore() => Console.Write(CountRightAnswers);
+    //public void ShowUserScore() => Console.Write(CountRightAnswers);
     public void NewGameScore()
     {
         CountRightAnswers = 0;

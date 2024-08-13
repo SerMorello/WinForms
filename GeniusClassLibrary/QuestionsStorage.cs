@@ -30,14 +30,6 @@ public class QuestionsStorage : IEnumerable<Question>
 
         return questions;
     }
-    public void ShowQuestions()
-    {
-        var showQuestions = GetQuestions();
-        for (int i = 0; i < showQuestions.Count; i++)
-        {
-            Console.WriteLine($"{i + 1} {showQuestions[i].QuestionText}");
-        }
-    }
 public List<int> GetNumbersQuestions()
     {
         List<int> numbers = new();

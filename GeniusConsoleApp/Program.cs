@@ -63,7 +63,11 @@ while (!endGame)
 
         case 3:
             Console.WriteLine();
-            questions.ShowQuestions();
+            questions.GetQuestions();
+            for (int i = 0; i < questions.Questions.Count; i++)
+            {
+                Console.WriteLine($"{i + 1} {questions.Questions[i].QuestionText}");
+            }
             Console.WriteLine();
 
             break;
@@ -86,7 +90,13 @@ while (!endGame)
 
         case 5:
             Console.WriteLine("Выберите номер вопроса который хотите удалить");
-            questions.ShowQuestions();
+
+            questions.GetQuestions();
+            for (int i = 0; i < questions.Questions.Count; i++)
+            {
+                Console.WriteLine($"{i + 1} {questions.Questions[i].QuestionText}");
+            }
+
             int numberRemoveQuestion = Convert.ToInt32(Console.ReadLine());
             questions.RemoveQuestion(numberRemoveQuestion - 1);
             Console.WriteLine("Вопрос удален");
